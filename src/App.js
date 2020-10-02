@@ -2,9 +2,8 @@ import React, { useState } from "react";
 
 // Normalizes string as a slug - a string that is safe to use
 // in both URLs and html attributes
-
-import Header from "./components/Header";
 import Parts from "./components/Parts/Parts";
+import Cart from "./components/Cart/Cart";
 
 import "./App.css";
 
@@ -42,26 +41,6 @@ function App(props) {
     setState({ selected });
   };
 
-  const summary = Object.keys(state.selected).map((feature, idx) => {
-    const featureHash = feature + "-" + idx;
-
-    const selectedOption = state.selected[feature];
-    return (
-      <div className="summary__option" key={featureHash}>
-        <div className="summary__option__label">{feature} </div>
-        <div className="summary__option__value">{selectedOption.name}</div>
-        <div className="summary__option__cost">
-          {USCurrencyFormat.format(selectedOption.cost)}
-        </div>
-      </div>
-    );
-  });
-
-  const total = Object.keys(state.selected).reduce(
-    (acc, curr) => acc + state.selected[curr].cost,
-    0
-  );
-
   return (
     <div className="App">
       <header>
@@ -77,16 +56,7 @@ function App(props) {
           currency={USCurrencyFormat}
           state={state}
         />
-        <section className="main__summary">
-          <Header header="Your cart" />
-          {summary}
-          <div className="summary__total">
-            <div className="summary__total__label">Total</div>
-            <div className="summary__total__value">
-              {USCurrencyFormat.format(total)}
-            </div>
-          </div>
-        </section>
+        <Cart state={state} currency={USCurrencyFormat} />
       </main>
     </div>
   );
