@@ -4,6 +4,8 @@ import PartItems from "./PartItems";
 import PartItemSelection from "./PartItemSelection";
 import slugify from "slugify";
 
+import "./Parts.css";
+
 const Parts = (props) => {
   const features = Object.keys(props.features).map((feature, idx) => {
     const featureHash = feature + "-" + idx;
