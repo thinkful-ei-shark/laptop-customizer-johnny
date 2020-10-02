@@ -2,7 +2,6 @@ import React from "react";
 
 const PartItems = (props) => {
   return (
-    // key={featureHash}
     <fieldset className="feature">
       <legend className="feature__name">
         <h3>{props.feature}</h3>
