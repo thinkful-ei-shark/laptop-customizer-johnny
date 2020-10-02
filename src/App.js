@@ -4,6 +4,9 @@ import React, { useState } from "react";
 // in both URLs and html attributes
 import slugify from "slugify";
 
+import Header from "./components/Header";
+import Parts from "./components/Parts/Parts";
+
 import "./App.css";
 
 // This object will allow us to
@@ -14,6 +17,7 @@ const USCurrencyFormat = new Intl.NumberFormat("en-US", {
 });
 
 function App(props) {
+  console.log(props);
   const [state, setState] = useState({
     selected: {
       Processor: {
@@ -40,41 +44,10 @@ function App(props) {
     console.log(selected);
     setState({ selected });
   };
-  const features = Object.keys(props.features).map((feature, idx) => {
-    const featureHash = feature + "-" + idx;
-    const options = props.features[feature].map((item) => {
-      const itemHash = slugify(JSON.stringify(item));
-      return (
-        <div key={itemHash} className="feature__item">
-          <input
-            type="radio"
-            id={itemHash}
-            className="feature__option"
-            name={slugify(feature)}
-            checked={item.name === state.selected[feature].name}
-            onChange={(e) => updateFeature(feature, item)}
-          />
-          <label htmlFor={itemHash} className="feature__label">
-            {item.name} ({USCurrencyFormat.format(item.cost)})
-          </label>
-        </div>
-      );
-    });
-
-    return (
-      <fieldset className="feature" key={featureHash}>
-        <legend className="feature__name">
-          <h3>{feature}</h3>
-        </legend>
-        {options}
-      </fieldset>
-    );
-  });
 
   const summary = Object.keys(state.selected).map((feature, idx) => {
     const featureHash = feature + "-" + idx;
     const selectedOption = state.selected[feature];
-
     return (
       <div className="summary__option" key={featureHash}>
         <div className="summary__option__label">{feature} </div>
@@ -97,12 +70,15 @@ function App(props) {
         <h1>ELF Computing | Laptops</h1>
       </header>
       <main>
-        <form className="main__form">
-          <h2>Customize your laptop</h2>
-          {features}
-        </form>
+        <Parts
+          features={props.features}
+          header="Customize your Laptop"
+          updateFeature={() => updateFeature()}
+          currency={USCurrencyFormat}
+          state={state}
+        />
         <section className="main__summary">
-          <h2>Your cart</h2>
+          <Header header="Your cart" />
           {summary}
           <div className="summary__total">
             <div className="summary__total__label">Total</div>
