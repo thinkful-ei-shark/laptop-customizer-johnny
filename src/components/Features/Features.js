@@ -4,8 +4,6 @@ import Header from "../Header";
 
 import FeatureOptions from "./FeatureOptions";
 
-import "./Parts.css";
-
 /*
 
  * Features contatiner component parses given features to pass to  component.
