@@ -1,8 +1,8 @@
 import React from "react";
 
-const PartItemSelection = (props) => {
+export default function Option(props) {
   return (
-    <div>
+    <div className="feature__item, feature_option, feature_label">
       <input
         type="radio"
         id={props.id}
@@ -11,11 +11,10 @@ const PartItemSelection = (props) => {
         checked={props.checked}
         onChange={props.onChange}
       />
+
       <label htmlFor={props.id} className="feature__label">
         {props.itemName} {props.currencyProp}
       </label>
     </div>
   );
-};
-
-export default PartItemSelection;
+}

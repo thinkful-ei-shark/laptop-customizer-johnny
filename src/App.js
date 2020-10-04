@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 // Normalizes string as a slug - a string that is safe to use
 // in both URLs and html attributes
-import Parts from "./components/Parts/Parts";
 import Cart from "./components/Cart/Cart";
+import Features from "./components/Features/Features";
 
 import "./App.css";
 
@@ -35,6 +35,8 @@ function App(props) {
       },
     },
   });
+
+  // Updates selected state
   const updateFeature = (feature, newValue) => {
     const selected = Object.assign({}, state.selected);
     selected[feature] = newValue;
@@ -47,7 +49,16 @@ function App(props) {
         <h1>ELF Computing | Laptops</h1>
       </header>
       <main>
-        <Parts
+        {/* <Parts
+          features={props.features}
+          header="Customize your Laptop"
+          updateFeature={(feature, newValue) =>
+            updateFeature(feature, newValue)
+          }
+          currency={USCurrencyFormat}
+          state={state}
+        /> */}
+        <Features
           features={props.features}
           header="Customize your Laptop"
           updateFeature={(feature, newValue) =>
